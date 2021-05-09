@@ -6,7 +6,7 @@ let pokemonList = [
 ]
 
 for (let i = 1; i < pokemonList.height; i++{
-    if (pokemonList[i].height <1)
+    if (pokemonList[i].height < 1)
     document.write(pokemonList[i].name + " is a small pokemon ");
   }else if (pokemonList[i].typing = dragon) {
     document.write(pokemonList[i].name + " is a dragon ");
@@ -14,4 +14,3 @@ for (let i = 1; i < pokemonList.height; i++{
     document.write(pokemonList[i].name + " can fly ");
 }
 
-/* where does the document,write go? */

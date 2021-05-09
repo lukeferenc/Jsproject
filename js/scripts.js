@@ -5,7 +5,7 @@ let pokemonList = [
     {number: 112, name: 'Rhydon', color: 'grey', height: 1.9, typing: ["rock","ground"] },
 ]
 
-for (let i = 1; i < pokemonList.height; i++{
+for (let i = 1; i < pokemonList.height; i++) {
     if (pokemonList[i].height < 1)
     document.write(pokemonList[i].name + " is a small pokemon ");
   }else if (pokemonList[i].typing = dragon) {

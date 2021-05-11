@@ -10,7 +10,7 @@ for (let i = 0; i < pokemonList.length; i++) {
     if (pokemonList[i].height > 2) {
     document.write(pokemonList[i].name + " is a big pokemon! <br/>");
   } else if (pokemonList[i].height < 0.5 ) {
-    document.write(pokemonList[i].name + "is a tiny pokemon! <br/>");
+    document.write(pokemonList[i].name + " is a tiny pokemon! <br/>");
   } if (pokemonList[i].typing.includes("dragon") ){
     document.write(pokemonList[i].name + " is a dragon! <br/>");
   } if (pokemonList[i].typing.includes("flying") ){

@@ -1,33 +1,53 @@
 let pokemonRepository = (function () {
-  let pokemonList = [
+  let Repository = [
     {number: 19, name: 'Rattata', color: 'purple', height: 0.3, typing: ["normal"] },
     {number: 112, name: 'Rhydon', color: 'grey', height: 1.9, typing: ["rock","ground"] },
     {number: 131, name: 'Lapras', color: 'blue', height: 2.5, typing: ["water","ice"] },
     {number: 149, name: 'Dragonite', color: 'Orange', height: 2.2, typing: ["dragon","flying"] },
   ];
-  
-  pokemonList.forEach(function(pokemon) {
-    if (pokemon.height > 2) {
-      document.write(pokemon.name + "is a big pokemon <br/>");
-    } else if (pokemon.height < 0.5 ) {
-      document.write(pokemon.name + "is a tiny pokemon! <br/>");
-    } if (pokemon.typing.includes("dragon")) {
-      document.write(pokemon.name + "is a dragon <br/>");
-    } if (pokemon.typing.includes("flying")) {
-      document.write(pokemon.name + "can fly <br/>");
-    }
-  });
-  
+
   function add(pokemon) {
-    pokemonList.push(pokemon);
+    if (
+      typeof pokemon === "object" &&
+      "name" in pokemon &&
+      "height" in pokemon &&
+      "types" in pokemon
+    ) {
+      Repository.push(pokemon);
+    } else {
+      console.log("pokemon is not correct");
+    }
   }
   
   function getAll() {
-    return pokemonList;
+    return Repository;
+  }
+  function addListItem(pokemon) {
+    let pokemonList = document.querySelector(".pokemon-list");
+    let listpokemon = document.createElement("li");
+    let button = document.createElement("button");
+    button.innerText = pokemon.name;
+    button.classList.add("button-class"); 
+    listpokemon.appendChild(button);
+    pokemonList.appendChild(listpokemon);
   }
   
   return {
     add: add,
-  getAll: getAll
+  getAll: getAll,
+  addListItem: addListItem
   };
 })();
+
+console.log(pokemonRepository.getAll());
+pokemonRepository.add({name: "Pikachu", height: 0.3, types: ["electic"] });
+
+console.log(pokemonRepository.getAll());
+  
+  pokemonRepository.getAll().forEach(function(pokemon) {
+    
+    pokemonRepository.addListItem(pokemon)
+  });
+  
+  
+  let ul = document.querySelector(".pokemon-list")

@@ -22,20 +22,20 @@ let pokemonRepository = (function () {
   function getAll() {
     return Repository;
   }
-  /*
+
   function addListItem(pokemon) {
-    let pokemonList = document.querySelector(".pokemon-list");
-    let listpokemon = document.createElement("li");
+    let ul = document.querySelector(".pokemon-list");
+    let listItem = document.createElement("li");
     let button = document.createElement("button");
-    let container = document.querySelector(".showDetails");
-    container.innerHTML = '<button>Click Me</button>';
-    console.log(container.innerHTML);
     button.innerText = pokemon.name;
-    button.classList.add("button-class"); 
-    listpokemon.appendChild(button);
-    pokemonList.appendChild(listpokemon);
+    button.classList.add("button-class");
+    listItem.appendChild(button);
+    ul.appendChild(listItem);
+    button.addEventListener("click", function(){
+      showDetails(pokemon)
+    });
   }
-  */
+
 
   function showDetails(pokemon) {
     console.log(pokemon)
@@ -44,18 +44,16 @@ let pokemonRepository = (function () {
   return {
     add: add,
     getAll: getAll,
-    /* addListItem: addListItem */
+    addListItem: addListItem
   };
 })();
 
-console.log(pokemonRepository.getAll());
 pokemonRepository.add({name: "Pikachu", height: 0.3, types: ["electic"] });
 
-console.log(pokemonRepository.getAll());
-  
+
 pokemonRepository.getAll().forEach(function(pokemon) {
-  
-  pokemonRepository.add(pokemon)
+  pokemonRepository.addListItem(pokemon);
+   
 });
 
   

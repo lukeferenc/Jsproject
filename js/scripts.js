@@ -63,16 +63,19 @@ function loadDetails(item) {
 }
 
 
-
   function showDetails(pokemon) {
-    console.log(pokemon)
-  }
+  loadDetails(pokemon).then(function () {
+    console.log(pokemon);
+  });    
+}
   
   return {
     add: add,
     getAll: getAll,
     addListItem: addListItem,
-    loadList: loadList
+    loadList: loadList,
+    loadDetails: loadDetails,
+    showDetails: showDetails
   };
 })();
 

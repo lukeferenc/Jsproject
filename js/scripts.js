@@ -1,10 +1,6 @@
 let pokemonRepository = (function () {
-  let Repository = [
-    {number: 19, name: 'Rattata', color: 'purple', height: 0.3, typing: ["normal"] },
-    {number: 112, name: 'Rhydon', color: 'grey', height: 1.9, typing: ["rock","ground"] },
-    {number: 131, name: 'Lapras', color: 'blue', height: 2.5, typing: ["water","ice"] },
-    {number: 149, name: 'Dragonite', color: 'Orange', height: 2.2, typing: ["dragon","flying"] },
-  ];
+  let pokemonList = [];
+  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
   function add(pokemon) {
     if (
@@ -13,14 +9,14 @@ let pokemonRepository = (function () {
       "height" in pokemon &&
       "types" in pokemon
     ) {
-      Repository.push(pokemon);
+      pokemonList.push(pokemon);
     } else {
       console.log("pokemon is not correct");
     }
   }
   
   function getAll() {
-    return Repository;
+    return pokemonList;
   }
 
   function addListItem(pokemon) {
@@ -36,6 +32,26 @@ let pokemonRepository = (function () {
     });
   }
 
+function loadList() {
+  return fetch(apiUrl).then(function (response) {
+    return response.json();
+  }).then(function (json){
+    json.results.forEach(function (item) {
+      let pokemon = {
+        name: item.name,
+        detailsUrl: item.url
+      };
+      add(pokemon);
+    });
+  }).catch(function (e) {
+    console.error(e);
+  })
+})
+
+
+
+  })
+}
 
   function showDetails(pokemon) {
     console.log(pokemon)

@@ -6,8 +6,7 @@ let pokemonRepository = (function () {
     if (
       typeof pokemon === "object" &&
       "name" in pokemon &&
-      "height" in pokemon &&
-      "types" in pokemon
+      "detailsUrl" in pokemon 
     ) {
       pokemonList.push(pokemon);
     } else {
@@ -18,6 +17,7 @@ let pokemonRepository = (function () {
   function getAll() {
     return pokemonList;
   }
+
 
   function addListItem(pokemon) {
     let ul = document.querySelector(".pokemon-list");
@@ -32,10 +32,11 @@ let pokemonRepository = (function () {
     });
   }
 
+
 function loadList() {
   return fetch(apiUrl).then(function (response) {
     return response.json();
-  }).then(function (json){
+  }).then(function (json) {
     json.results.forEach(function (item) {
       let pokemon = {
         name: item.name,
@@ -46,12 +47,22 @@ function loadList() {
   }).catch(function (e) {
     console.error(e);
   })
-})
-
-
-
-  })
 }
+
+function loadDetails(item) {
+  let url = item.detailsUrl;
+  return fetsch(url).then(function (response) {
+    return response.json();
+  }).then(function (details) {
+    item.imageUrl = details.sprites.front_default;
+    item.height = details.height;
+    item.types = details.types;
+  }).catch(function (e) {
+    console.error(e);
+  });
+}
+
+
 
   function showDetails(pokemon) {
     console.log(pokemon)
@@ -60,16 +71,16 @@ function loadList() {
   return {
     add: add,
     getAll: getAll,
-    addListItem: addListItem
+    addListItem: addListItem,
+    loadList: loadList
   };
 })();
 
-pokemonRepository.add({name: "Pikachu", height: 0.3, types: ["electic"] });
 
-
-pokemonRepository.getAll().forEach(function(pokemon) {
-  pokemonRepository.addListItem(pokemon);
-   
+pokemonRepository.loadList().then(function() {
+  pokemonRepository.getAll().forEach(function(pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
 });
 
   

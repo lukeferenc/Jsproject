@@ -10,9 +10,9 @@ let pokemonRepository = (function () {
   function add(pokemon) {
     if (
       typeof pokemon === "object" &&
-      "name" in pokemon &&
-      "detailsUrl" in pokemon 
-    ) {
+      "name" in pokemon &&)
+      // "detailsUrl" in pokemon 
+     {
       pokemonList.push(pokemon);
     } else {
       console.log("pokemon is not correct");
@@ -42,6 +42,8 @@ let pokemonRepository = (function () {
 
 // API list
 
+let indexes = getAllindexes(pokemonList);
+
 function loadList() {
   return fetch(apiUrl).then(function (response) {
     return response.json();
@@ -49,7 +51,7 @@ function loadList() {
     json.results.forEach(function (item) {
       let pokemon = {
         name: item.name,
-        detailsUrl: item.url
+        detailsUrl: item.url,
       };
       add(pokemon);
     });
@@ -68,6 +70,8 @@ function loadDetails(item) {
     item.imageUrl = details.sprites.front_default;
     item.height = details.height;
     item.types = details.types;
+    item.weight = details.weight;
+    item.abilities = details.abilities;
   }).catch(function (e) {
     console.error(e);
   });
@@ -172,7 +176,7 @@ if (target === modalContainer) {
 
 
 pokemonRepository.loadList().then(function() {
-  pokemonRepository.getAll().forEach(function(pokemon) {
+  pokemonRepository.getAll().forEach(function(pokemon, index) {
     pokemonRepository.addListItem(pokemon);
   });
 });

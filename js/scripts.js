@@ -1,6 +1,11 @@
+
+// IIFE
+
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+
+// push
 
   function add(pokemon) {
     if (
@@ -13,11 +18,14 @@ let pokemonRepository = (function () {
       console.log("pokemon is not correct");
     }
   }
-  
+
+// return
+
   function getAll() {
     return pokemonList;
   }
 
+// list & items
 
   function addListItem(pokemon) {
     let ul = document.querySelector(".pokemon-list");
@@ -32,6 +40,7 @@ let pokemonRepository = (function () {
     });
   }
 
+// API list
 
 function loadList() {
   return fetch(apiUrl).then(function (response) {
@@ -49,6 +58,8 @@ function loadList() {
   })
 }
 
+// Details
+
 function loadDetails(item) {
   let url = item.detailsUrl;
   return fetch(url).then(function (response) {
@@ -63,12 +74,46 @@ function loadDetails(item) {
 }
 
 
-  function showDetails(pokemon) {
-  loadDetails(pokemon).then(function () {
-    console.log(pokemon);
-  });    
-}
-  
+  // Display 
+
+  function showDetails(item) {
+    pokemonRepository.loadDetails(item).then(function () {
+      showModal(item);
+    });
+  }
+
+  // Modal
+
+  function showModal(item) {
+    let modalBody = $('.modal-body');
+    let modalTitle = $('.modal-title');
+    // eslint-disable-next-line no-unused-vars
+    let modalHeader = $('.modal-header');
+
+    modalTitle.empty();
+    modalBody.empty();
+
+    let nameElement = $('<h1>' + item.name + '</h1>');
+    let imageElementFront = $('<img class="modal-img" style="width:50%">');
+    imageElementFront.attr('src', item.imageUrlFront);
+    let imageElementBack = $('<img class="modal-img" style="width:50%">');
+    imageElementBack.attr('src', item.imageUrlBack);
+    let heightElement = $('<p>' + 'height : ' + item.height + '</p>');
+    let weightElement = $('<p>' + 'weight : ' + item.weight + '</p>');
+    let typesElement = $('<p>' + 'types : ' + item.types + '</p>');
+    let abilitiesElement = $('<p>' + 'abilities : ' + item.abilities + '</p>');
+
+    modalTitle.append(nameElement);
+    modalBody.append(imageElementFront);
+    modalBody.append(imageElementBack);
+    modalBody.append(heightElement);
+    modalBody.append(weightElement);
+    modalBody.append(typesElement);
+    modalBody.append(abilitiesElement);
+  }
+
+// return
+
   return {
     add: add,
     getAll: getAll,

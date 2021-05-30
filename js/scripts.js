@@ -41,13 +41,13 @@ let pokemonRepository = (function () {
 
 // API list
 
-function getAllIndexes(arr, val) {
+function getAllindexes(arr, val) {
   var indexes = [], i = -1;
   while ((i = arr.indexOf(val, i+1)) != -1){
       indexes.push(i);
   }
   return indexes;
-
+}
 let indexes = getAllindexes(pokemonList);
 
 function loadList() {
@@ -87,7 +87,7 @@ function loadDetails(item) {
   // showDetails
 
 function showDetails(pokemon) {
-      pokemonRepo.loadDetails(pokemon).then(function () {
+      pokemonRepository.loadDetails(pokemon).then(function () {
       showModal(pokemon);
       console.log(pokemon);
       });
@@ -183,6 +183,7 @@ pokemonRepository.loadList().then(function() {
   pokemonRepository.getAll().forEach(function(pokemon, index) {
     pokemonRepository.addListItem(pokemon);
   })
+
 });
 
   

@@ -90,51 +90,37 @@ function loadDetails(item) {
 
 function showDetails(pokemon) {
       pokemonRepository.loadDetails(pokemon).then(function () {
-      showModal(pokemon);
-      console.log(pokemon);
-      });
-    }
 
-    let modalContainer = document.querySelector('#modal-container');
+    let modalBody = $('.modal-body');
+    let modalTitle = $('.modal-title');
+    let modalHeader = $('.modal-header');
 
-    function showModal(pokemon) {
-    
-      modalContainer.innerHTML = '';
-        
-      let modal = document.createElement('div');
-      modal.classList.add('modal');
+    modalTitle.empty();
+    modalBody.empty();
 
-      let closeButtonElement = document.createElement('button');
-      closeButtonElement.classList.add('modal-close');
-      closeButtonElement.innerHTML = `<img width="30px" height="30px" src="img/close-icon.png">` ;
-      closeButtonElement.addEventListener('click', hideModal);
+    let pokemonName = $('<h1>' + pokemon.name + '</h1>');
+    let pokemonImage = $('<img class="modal-img" style="width:50%">');
+    pokemonImage.attr('src', pokemon.imageUrl);
+    let pokemonHeight = $('<p>' + 'Height: ' + pokemon.height + '</p>');
+    let pokemonTypes = document.createElement('ul');
+    let types = 'Type: ';
+    pokemon.types.forEach(function (item) {
+    types += '<li>' + item.type.name + '</li>'
+    });
+    pokemonTypes.innerHTML = types;
 
-      let nameElement = document.createElement('h2');
-        nameElement.innerText = pokemon.name;
-
-      let imageElement = document.createElement('img');
-        imageElement.setAttribute('src', pokemon.imageUrl);
-        imageElement.classList.add('pokemon-image');
-
-      let heightElement = document.createElement('p');
-        heightElement.innerText = 'Height ' + pokemon.height;
+    modalTitle.append(pokemonName);
+    modalBody.append(pokemonImage);
+    modalBody.append(pokemonHeight);
+    modalBody.append(pokemonTypes);
       
-      let weightElement = document.createElement('p');
-        weightElement.innerText = 'Weight ' + pokemon.weight;
-
-      let typesDiv = document.createElement('div');
-        typesDiv.classList.add('type-wrapper');
       
-        pokemon.types.forEach((type) => {
-        let typesElement = document.createElement('div');
-        let typesText = document.createElement('p');
-        typesText.innerText = type.type.name;
-
-        typesElement.classList.add('type');
-        typesElement.classList.add(type.type.name);
-        typesElement.appendChild(typesText);
-        typesDiv.appendChild(typesElement);
-      });
+    $('#pokemonModal').modal('toggle')
+      typesElement.classList.add('type');
+      typesElement.classList.add(type.type.name);
+      typesElement.appendChild(typesText);
+      typesDiv.appendChild(typesElement);
+    });
 
       modal.appendChild(closeButtonElement);
       modal.appendChild(imageElement);

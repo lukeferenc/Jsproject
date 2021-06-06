@@ -116,44 +116,8 @@ function showDetails(pokemon) {
       
       
     $('#pokemonModal').modal('toggle')
-      typesElement.classList.add('type');
-      typesElement.classList.add(type.type.name);
-      typesElement.appendChild(typesText);
-      typesDiv.appendChild(typesElement);
-    });
-
-      modal.appendChild(closeButtonElement);
-      modal.appendChild(imageElement);
-      modal.appendChild(nameElement);
-      modal.appendChild(typesDiv); 
-      modal.appendChild(heightElement);
-      modal.appendChild(weightElement);
-      modalContainer.appendChild(modal);
-      
-      modalContainer.classList.add('is-visible');
-
-  }
-
-  function hideModal() {
-  let modalContainer = document.querySelector('#modal-container');
-    modalContainer.classList.remove('is-visible');
-  }
-
-  window.addEventListener('keydown', (e) => {
-    let modalContainer = document.querySelector('#modal-container');
-    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-      hideModal();  
-    }
   });
-
-  modalContainer.addEventListener('click', (e) => {
-    let target = e.target;
-    if (target === modalContainer) {
-      hideModal();
-    }
-});
-
-
+}
   // return
 
   return {
@@ -174,4 +138,4 @@ pokemonRepository.loadList().then(function() {
 
 });
 
-  
+

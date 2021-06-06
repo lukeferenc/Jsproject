@@ -1,4 +1,8 @@
-.button-class {
+.list-group {
+  margin: 10px;
+}
+
+.list-group-item {
     background-color: coral;
     border: none;
     color: deepskyblue;
@@ -20,6 +24,13 @@ body {
     background-color: #f5ce34;
     font-family: 'Roboto Mono', monospace;
   }
+  
+  button.btn.btn-block {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 2px 4px;
+  }
+  
   
   #modal-container {
     position: fixed;
@@ -78,3 +89,5 @@ body {
     /* CSS for modal container - add your own desired CSS styles here */
     display: block;
   }
+
+  

@@ -37,20 +37,11 @@ let pokemonRepository = (function () {
     pokemonList.appendChild(listPokemon);
     listPokemon.appendChild(button);
     button.addEventListener('click', function(){
-      showDetails(pokemon)
+      showDetails(pokemon);
     });
   }
 
 // API list
-
-function getAllindexes(arr, val) {
-  var indexes = [], i = -1;
-  while ((i = arr.indexOf(val, i+1)) != -1){
-      indexes.push(i);
-  }
-  return indexes;
-}
-let indexes = getAllindexes(pokemonList);
 
 function loadList() {
   return fetch(apiUrl).then(function (response) {
@@ -65,7 +56,7 @@ function loadList() {
     });
   }).catch(function (e) {
     console.error(e);
-  })
+  });
 }
 
 // Details
@@ -93,8 +84,7 @@ function showDetails(pokemon) {
 
     let modalBody = $('.modal-body');
     let modalTitle = $('.modal-title');
-    let modalHeader = $('.modal-header');
-
+    
     modalTitle.empty();
     modalBody.empty();
 
@@ -105,7 +95,7 @@ function showDetails(pokemon) {
     let pokemonTypes = document.createElement('ul');
     let types = 'Type: ';
     pokemon.types.forEach(function (item) {
-    types += '<li>' + item.type.name + '</li>'
+    types += '<li>' + item.type.name + '</li>';
     });
     pokemonTypes.innerHTML = types;
 
@@ -115,7 +105,7 @@ function showDetails(pokemon) {
     modalBody.append(pokemonTypes);
       
       
-    $('#pokemonModal').modal('toggle')
+    $('#pokemonModal').modal('toggle');
   });
 }
   // return
@@ -132,9 +122,9 @@ function showDetails(pokemon) {
 
 
 pokemonRepository.loadList().then(function() {
-  pokemonRepository.getAll().forEach(function(pokemon, index) {
+  pokemonRepository.getAll().forEach(function(pokemon) {
     pokemonRepository.addListItem(pokemon);
-  })
+  });
 
 });
 

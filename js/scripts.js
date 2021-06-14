@@ -3,18 +3,18 @@
 
 let pokemonRepository = (function () {
   let pokemonList = [];
-  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
 // push
 
   function add(pokemon) {
     if (
-      typeof pokemon === "object")
+      typeof pokemon === 'object')
       // "detailsUrl" in pokemon 
      {
       pokemonList.push(pokemon);
     } else {
-      console.log("pokemon is not correct");
+      console.log('pokemon is not correct');
     }
   }
 
@@ -36,7 +36,7 @@ let pokemonRepository = (function () {
     button.setAttribute('data-target','#pokemonModal','data-toggle','modal');
     pokemonList.appendChild(listPokemon);
     listPokemon.appendChild(button);
-    button.addEventListener("click", function(){
+    button.addEventListener('click', function(){
       showDetails(pokemon)
     });
   }

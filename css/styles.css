@@ -1,36 +1,165 @@
-.list-group {
-  margin: 10px;
+:root {
+  --yellow: #f1d412;
+  --terracotta: #e07a5f;
+  --independence: #242424;
+  --greensheen: #81b29a;
+  --de_champagne: #fcfcfc;
+  --shadow: #0d6b15a4;
+  --padding: 20px;
 }
 
-.list-group-item {
-    background-color: coral;
-    border: none;
-    color: deepskyblue;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    -webkit-transition-duration: 0.4;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    background-color: white;
-    color: black;
-    border: 2px solid green;
+* {
+  box-sizing: border-box;
 }
 
 body {
-    background-color: #f5ce34;
-    font-family: 'Roboto Mono', monospace;
-  }
+  background-color: var(--yellow);
+  color: var(--independence);
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  /* Sets the font size to 16px */
+  line-height: 1.6;
+  /* Sets the line-height to 1.6 */
+}
+
+.navbar {
+  color: var(--independence);
+  background-color: var(--independence);
+  display: flex;
+
+}
+
+.title {
+  text-align: center;
+  padding: 0;
+}
+
+.pokemon-list {
+  list-style-type: none;
+  /*remove padding-inline-start: 40px*/
+  column-count: 3;
+  margin: 0;
+  padding: 0;
+}
+
+.pokemon-panel {
+  /* overwrites browser defaults and resets the border */
+  border: none;
+  width: 50%;
+  margin: 10px auto;
+  display: block;
+  /* takes the font from the outer container */
+  font-family: inherit;
+  font-size: inherit;
+  text-transform: capitalize;
+  /* styles the background color, font color, and text decoration (underline, etc.) of the button */
+  background-color: var(--de_champagne);
+  color: var(--independence);
+  text-decoration: none;
+  /*adds spacing to the button (this will be discussed more in-depth later) */
+  padding: 10px;
+  border-radius: 3px;
+  /* gives the button a bottom border with a width of 2px, a type of solid, and a color in RGBA format */
+  box-shadow: 2px 2px var(--shadow);
+  border-right: 2px solid var(--shadow);
+  border-bottom: 2px solid var(--shadow);
+  transition-duration: 0.2s;
+  transition-property: opacity;
+}
+
+.pokemon-panel:hover, .modal-close:hover { 
+  /* lets the mouse appear as a hand when hovering over the button */
+  cursor: pointer;
+  /* reduces the opacity of the button to 80% */
+  opacity: 0.8;
+
+}
+
+.pokemon-panel:active {
+  /*clicked-button effect*/
+  box-shadow: none;
+  transform: translate(2px, 2px);
+}
+
+
+
+#loading-image {
+  /*to make sure the loading image at the center of the page*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*styling for modal container*/
+#modal-container {
+  position: fixed;
+  padding: 20px;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
   
-  button.btn.btn-block {
-    font-size: 18px;
-    font-weight: bold;
-    padding: 2px 4px;
-  }
+  /* to show it above other content */
+  z-index: 999; 
   
+  /* to allow scrolling if the screen is not high enough*/
+  overflow: auto; 
+  
+  /* this is used to center the modal */
+  display: none;
+  text-align: center;
+}
+
+/*style when modal container is visible*/
+#modal-container.is-visible {
+  display: grid;
+}
+
+/*styling for modal*/
+.modal {
+
+  margin: auto;
+  display: inline-block;
+  box-sizing: border-box;
+  background: var(--de_champagne);
+  padding: 15px;
+  width: 100%;
+  max-width: 700px;
+  text-align: left;
+}
+
+/*styling for the Close button*/
+.modal-close {
+  float: right;
+  -webkit-appearance: none;
+  border: 0;
+  background: none;
+  color: var(--independence);
+  text-decoration: underline;
+}
+
+/*styling for modal title*/
+.modal h1 {
+  margin-top: 0;
+  color: var(--independence);
+  text-transform: capitalize;
+}
+
+.modal img {
+  float: left;
+  width: 200px;
+  margin-right: 40px;
+}
+
+/*styling for modal text*/
+.modal p {
+  margin-bottom: 0;
+  color: var(--independence);
+}
   
   
 
